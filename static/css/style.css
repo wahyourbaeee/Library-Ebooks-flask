@@ -1,0 +1,32 @@
+/* style.css */
+
+/* Mengimpor font Inter dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Mengatur font-family dan warna latar belakang untuk body */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #e2e8f0; /* Warna latar belakang yang lebih lembut */
+}
+
+/* Mengatur transisi dan sudut melengkung untuk kartu (card) */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 1rem; /* Sudut yang lebih melengkung */
+}
+
+/* Efek saat mouse mengarah ke kartu (card) */
+.card:hover {
+    transform: translateY(-8px); /* Efek melayang yang sedikit lebih besar */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Mengatur transisi untuk tombol (button) */
+.btn {
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Efek saat tombol ditekan */
+.btn:active {
+    transform: scale(0.98);
+}
