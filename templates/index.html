@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan Ebook Pribadi</title>
+    <!-- Tautan ke Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tautan ke file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Tautan ke font Inter dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-200 min-h-screen text-gray-800">
+    <!-- Header -->
+    <header class="bg-slate-700 text-white p-6 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Perpustakaan Ebook</h1>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg btn">
+                <span class="hidden md:inline">Tambah Buku Baru</span>
+                <span class="md:hidden">+</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-10">
+        
+        <!-- Bagian Terakhir Dibaca -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-slate-800">Terakhir Dibaca</h2>
+            <div id="last-read-book" class="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow-lg p-8 card">
+                <img src="https://placehold.co/150x225/e0e0e0/4B7BE5?text=Sampul" alt="Sampul Buku Terakhir Dibaca" class="w-32 h-48 md:w-40 md:h-60 rounded-xl object-cover shadow-md mr-0 md:mr-8 mb-6 md:mb-0">
+                <div class="flex-1 text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Judul Buku Terakhir Dibaca</h3>
+                    <p class="text-gray-600 italic">Oleh: Nama Penulis</p>
+                    <p class="mt-4 text-gray-700 leading-relaxed">Deskripsi singkat yang berisi ringkasan cerita atau ulasan personal yang membuat Anda ingin terus membacanya. Bagian ini bisa Anda isi dengan ringkasan dari buku Anda sendiri.</p>
+                    <a href="#" class="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-md btn">Lanjutkan Membaca</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Daftar Buku -->
+        <section>
+            <h2 class="text-3xl font-bold mb-6 text-slate-800">Koleksi Ebook</h2>
+            <div id="book-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+                <!-- Contoh Kartu Buku 1 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
+                    <img src="https://placehold.co/300x450/d1d5db/374151?text=Buku+Satu" alt="Sampul Buku Satu" class="w-full h-56 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">Judul Buku Satu</h3>
+                        <p class="text-sm text-gray-500">Oleh: John Doe</p>
+                        <div class="flex mt-4 space-x-2">
+                            <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                Edit
+                            </button>
+                            <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                Hapus
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh Kartu Buku 2 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
+                    <img src="https://placehold.co/300x450/d1d5db/374151?text=Buku+Dua" alt="Sampul Buku Dua" class="w-full h-56 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">Judul Buku Dua</h3>
+                        <p class="text-sm text-gray-500">Oleh: Jane Smith</p>
+                        <div class="flex mt-4 space-x-2">
+                            <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                Edit
+                            </button>
+                            <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                Hapus
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh Kartu Buku 3 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
+                    <img src="https://placehold.co/300x450/d1d5db/374151?text=Buku+Tiga" alt="Sampul Buku Tiga" class="w-full h-56 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">Judul Buku Tiga</h3>
+                        <p class="text-sm text-gray-500">Oleh: Robert Brown</p>
+                        <div class="flex mt-4 space-x-2">
+                            <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                Edit
+                            </button>
+                            <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                Hapus
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh Kartu Buku 4 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
+                    <img src="https://placehold.co/300x450/d1d5db/374151?text=Buku+Empat" alt="Sampul Buku Empat" class="w-full h-56 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">Judul Buku Empat</h3>
+                        <p class="text-sm text-gray-500">Oleh: Lisa Green</p>
+                        <div class="flex mt-4 space-x-2">
+                            <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                Edit
+                            </button>
+                            <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                Hapus
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-300 text-center p-4 mt-10 text-gray-600">
+        <p class="text-sm">&copy; 2025 Perpustakaan Pribadi. Semua hak dilindungi.</p>
+    </footer>
+
+    <!-- Tautan ke file JavaScript eksternal -->
+    <script src="script.js"></script>
+</body>
+</html>
