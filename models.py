@@ -12,6 +12,7 @@ class Books(db.Model):
     isbn = db.Column(db.String(200))
     year = db.Column(db.Integer)
     cover_image = db.Column(db.String)
+    ebook_file = db.Column(db.String)
     
     def to_dict(self):
         return {
@@ -20,5 +21,6 @@ class Books(db.Model):
             "author": self.author,
             "isbn": self.isbn,
             "cover_image": self.cover_image,
+            "ebook_file": self.ebook_file,
             "year": self.year
         }

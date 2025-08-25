@@ -7,21 +7,41 @@
     <!-- Tautan ke Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tautan ke file CSS eksternal -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- Tautan ke font Inter dari Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e8f0; /* Warna latar belakang yang lebih lembut */
+        }
+        .card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 1rem; /* Sudut yang lebih melengkung */
+        }
+        .card:hover {
+            transform: translateY(-8px); /* Efek melayang yang sedikit lebih besar */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+    </style>
 </head>
 <body class="bg-slate-200 min-h-screen text-gray-800">
     <!-- Header -->
     <header class="bg-slate-700 text-white p-6 shadow-xl sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-3xl font-bold"><a href ='/' >Perpustakaan Ebook</a></h1>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg btn">
-                <span class="hidden md:inline"><a href='/books/add' > Tambah Buku Baru</a></span>
+            <a href="{{ url_for('add_book') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg btn">
+                <span class="hidden md:inline">Tambah Buku Baru</span>
                 <span class="md:hidden">+</span>
-            </button>
+            </a>
         </div>
     </header>
 
@@ -46,75 +66,38 @@
         <section>
             <h2 class="text-3xl font-bold mb-6 text-slate-800">Koleksi Ebook</h2>
             <div id="book-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-
-                <!-- Contoh Kartu Buku 1 -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
-                    <img src="https://placehold.co/300x450/d1d5db/374151?text=Buku+Satu" alt="Sampul Buku Satu" class="w-full h-56 object-cover">
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">Judul Buku Satu</h3>
-                        <p class="text-sm text-gray-500">Oleh: John Doe</p>
-                        <div class="flex mt-4 space-x-2">
-                            <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
-                                Edit
-                            </button>
-                            <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
-                                Hapus
-                            </button>
+                
+                {% if books %}
+                    {% for book in books %}
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
+                        <img src="{{ book.cover_image or url_for('static', filename='placeholder.png') }}" alt="Sampul {{ book.title }}" class="w-full h-56 object-cover">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">{{ book.title }}</h3>
+                            <p class="text-sm text-gray-500">Oleh: {{ book.author }}</p>
+                            <div class="flex mt-4 space-x-2">
+                                {% if book.ebook_file %}
+                                <!-- Tombol Baca Buku hanya ditampilkan jika ada file ebook -->
+                                <a href="{{ url_for('static', filename='ebooks/' + book.ebook_file.split('/')[-1]) }}" target="_blank" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                    Baca
+                                </a>
+                                {% endif %}
+                                <!-- Tombol Edit -->
+                                <a href="{{ url_for('update_books', book_id=book.id) }}" class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                    Edit
+                                </a>
+                                <!-- Tombol Hapus (gunakan form untuk POST request) -->
+                                <form action="{{ url_for('delete_books', book_id=book.id) }}" method="post" class="flex-1">
+                                    <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
+                                        Hapus
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Contoh Kartu Buku 2 -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
-                    <img src="https://placehold.co/300x450/d1d5db/374151?text=Buku+Dua" alt="Sampul Buku Dua" class="w-full h-56 object-cover">
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">Judul Buku Dua</h3>
-                        <p class="text-sm text-gray-500">Oleh: Jane Smith</p>
-                        <div class="flex mt-4 space-x-2">
-                            <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
-                                Edit
-                            </button>
-                            <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
-                                Hapus
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contoh Kartu Buku 3 -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
-                    <img src="https://placehold.co/300x450/d1d5db/374151?text=Buku+Tiga" alt="Sampul Buku Tiga" class="w-full h-56 object-cover">
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">Judul Buku Tiga</h3>
-                        <p class="text-sm text-gray-500">Oleh: Robert Brown</p>
-                        <div class="flex mt-4 space-x-2">
-                            <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
-                                Edit
-                            </button>
-                            <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
-                                Hapus
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contoh Kartu Buku 4 -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden card">
-                    <img src="https://placehold.co/300x450/d1d5db/374151?text=Buku+Empat" alt="Sampul Buku Empat" class="w-full h-56 object-cover">
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-semibold text-gray-900 truncate mb-1">Judul Buku Empat</h3>
-                        <p class="text-sm text-gray-500">Oleh: Lisa Green</p>
-                        <div class="flex mt-4 space-x-2">
-                            <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
-                                Edit
-                            </button>
-                            <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg btn text-sm shadow-sm">
-                                Hapus
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center col-span-full text-gray-500">Belum ada buku di perpustakaan. Tambahkan satu!</p>
+                {% endif %}
             </div>
         </section>
     </main>
@@ -125,6 +108,6 @@
     </footer>
 
     <!-- Tautan ke file JavaScript eksternal -->
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
