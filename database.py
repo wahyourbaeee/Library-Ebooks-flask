@@ -16,14 +16,18 @@ class Books(db.model):
     id = db.column(db.integer, primary_key = True)
     title = db.column(db.string(150), nullable = False)
     author = db.column(db.string(100))
+    isbn = db.column(db.string(200))
     year = db.column(db.integer)
+    Picture = db.column(db.string)
     
     def to_dict(self):
         return{
             "id" : self.id,
             "title" : self.title,
             "author" : self.author,
-            "year" : self.year
+            "isbn" : self.isbn,
+            "picture" : self.Picture
+            # "year" : self.year
         }
 
 with app.app_context():
