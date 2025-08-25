@@ -1,35 +1,24 @@
-from flask import Flask
+# models.py
 from flask_sqlalchemy import SQLAlchemy
 
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://books.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+# Inisialisasi objek SQLAlchemy, tanpa terikat dengan aplikasi
 db = SQLAlchemy()
 
-
 class Books(db.Model):
-    id = db.column(db.integer, primary_key = True)
-    title = db.column(db.string(150), nullable = False)
-    author = db.column(db.string(100))
-    isbn = db.column(db.string(200))
-    year = db.column(db.integer)
-    Picture = db.column(db.string)
+    __tablename__ = 'books' # Nama tabel di database
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(150), nullable=False)
+    author = db.Column(db.String(100))
+    isbn = db.Column(db.String(200))
+    year = db.Column(db.Integer)
+    cover_image = db.Column(db.String)
     
     def to_dict(self):
-        return{
-            "id" : self.id,
-            "title" : self.title,
-            "author" : self.author,
-            "isbn" : self.isbn,
-            "picture" : self.Picture
-            # "year" : self.year
+        return {
+            "id": self.id,
+            "title": self.title,
+            "author": self.author,
+            "isbn": self.isbn,
+            "cover_image": self.cover_image,
+            "year": self.year
         }
-
-
-with app.app_context():
-    db.create_all()
-
-# db = SQLAlchemy(model_class=Base)

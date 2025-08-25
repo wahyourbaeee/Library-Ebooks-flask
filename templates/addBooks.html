@@ -38,7 +38,6 @@
         <h1 class="text-3xl font-bold text-center mb-6 text-slate-700">Tambah Buku Baru</h1>
         <p class="text-center text-gray-500 mb-8">Isi formulir di bawah untuk menambahkan buku ke koleksi Anda.</p>
         
-        {% comment %} submit buku {% endcomment %}
         <form action="/books/add" method="post" class="space-y-6">
             <div>
                 <label for="title" class="block text-gray-700 font-semibold mb-1">Judul Buku</label>
@@ -60,7 +59,9 @@
                 <input type="text" id="cover_image" name="cover_image" class="input-field">
             </div>
             
+            <!-- Perbaikan: Tambahkan teks ke tombol submit -->
             <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-colors">
+                Tambahkan Buku
             </button>
         </form>
     </div>
