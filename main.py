@@ -65,6 +65,7 @@ def add_book():
         # Mengarahkan kembali ke halaman utama
         return redirect(url_for('main'))
     
+    
     # Jika method adalah GET, tampilkan halaman form    
     return render_template("addBooks.html")
 
@@ -76,9 +77,12 @@ def delete_books():
 def update_books():
     return 'hapus buku berdasarkan id'
 
-@app.route("/<id>", methods = ['GET'])
-def read_book():
-    return 'hallo'
+@app.route("/books/<int:id>", methods=['GET'])
+def read_book(id):
+    if request.method == 'GET':
+        print(Books)
+    return Books
+
 
 @app.route("/books/lastRead")
 def last_reading_books():
